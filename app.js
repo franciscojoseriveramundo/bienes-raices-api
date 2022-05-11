@@ -1,5 +1,8 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
 
+let mysql = require('mysql');
+let config = require('./config/config.js');
+
 var express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors');
@@ -20,6 +23,16 @@ app.use('/v1', require('./routes'));
 // Iniciando el servidor...
 var server = app.listen(process.env.PORT || 4000, function(){
   console.log('Escuchando en el puerto ' + server.address().port);
+});
+
+let connection = mysql.createConnection(config);
+
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('Se realizó la conexion a la base de datos');
 });
 
 //sequelize.authenticate()
