@@ -8,5 +8,6 @@ router.use('/userrole', require('./userrole'));
 router.use('/sex', require('./sex'));
 router.use('/typecontactregister', require('./typecontactregister'));
 router.use('/typecontact', require('./typecontact'));
+router.use('/users', require('./users'));
 
 module.exports = router;
