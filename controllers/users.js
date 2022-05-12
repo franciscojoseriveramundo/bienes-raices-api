@@ -62,8 +62,6 @@ function createUser(req, res){
         //Consulta sql (stored procedure)
         let sql = `call usp_CreateUser(?,?,?,?,?,?,?,?)`;
 
-        console.log("Que onda");
-
         connection.query(sql, [body.Username, body.UserLastName, body.UsersSex, body.UsersRoleId, body.UsersStatusId, body.UsersPassword, body.UsersEmail, body.UsersPhone], (error, results, fields) => {
 
             //En caso de error en la ejecución//
@@ -75,7 +73,7 @@ function createUser(req, res){
                 }));
             }
 
-            console.log(results);
+            //console.log(results);
 
             //Convertimos en arreglo los resultados de salida del stored procedure.
             const result = Object.values(JSON.parse(JSON.stringify(results[0])));

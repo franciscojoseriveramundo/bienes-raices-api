@@ -26,6 +26,8 @@ function getProducts(req, res){
                 }));
             }
 
+            console.log(results[0]);
+
             //Convertimos en arreglo los resultados de salida del stored procedure.
             const result = Object.values(JSON.parse(JSON.stringify(results[0])));
 
