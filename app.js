@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use('/v1', require('./routes'));
 
 // Iniciando el servidor...
-var server = app.listen(process.env.PORT || 4000, function(){
+var server = app.listen(process.env.PORT || 3000, function(){
   console.log('Escuchando en el puerto ' + server.address().port);
 });
 
