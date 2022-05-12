@@ -25,6 +25,7 @@ var server = app.listen(process.env.PORT || 4000, function(){
   console.log('Escuchando en el puerto ' + server.address().port);
 });
 
+/*
 let connection = mysql.createConnection(config);
 
 connection.connect(function(err) {
@@ -34,6 +35,7 @@ connection.connect(function(err) {
 
   console.log('Se realizó la conexion a la base de datos');
 });
+*/
 
 //sequelize.authenticate()
 //.then(() => {
