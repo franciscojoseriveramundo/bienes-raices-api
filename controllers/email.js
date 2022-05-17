@@ -59,7 +59,7 @@ function sendEmail(req, res){
         require('dotenv').config();
 
         const sgMail = require('@sendgrid/mail')
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        sgMail.setApiKey("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")
 
         const msg = {
             to: body.EmailTo,
@@ -68,7 +68,9 @@ function sendEmail(req, res){
             html: body.EmailHTML,
         }
 
-        sgMail.send(msg).then(() => {
+        sgMail.send(msg).then((resp) => {
+            console.log("EmailSend");
+            console.log(resp);
             resolve(res.status(201).send({
                 response: {
                     Code: 1,
@@ -77,12 +79,13 @@ function sendEmail(req, res){
             }));
         })
         .catch((error) => {
-            console.error(error.response.body)
-
-            reject(res.status(201).send({
+            //console.error(error.response)
+            console.log("Error");
+            console.log(error);
+            resolve(res.status(201).send({
                 response: {
                     Code: 0,
-                    Message: error.response.body
+                    Message: "El correo electrónico no fue enviado."
                 }
             }));
         })
