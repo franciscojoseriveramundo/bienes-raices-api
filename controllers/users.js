@@ -2,6 +2,8 @@
 //const sequelize = require('../config/bdConection');
 let mysql = require('mysql');
 let config = require('../config/config.js');
+let CryptoENC = require('crypto-js/enc-utf8');
+let CryptoAES = require('crypto-js/aes');
 
 //Funcion que realiza el inicio de sesión en el aplicativo.
 function getUserForLogin(req, res){
@@ -37,11 +39,36 @@ function getUserForLogin(req, res){
             //Itero el resultado y los agrego a la salida final
             result.forEach((v) => response.push(v));
 
-            //Resultado de codigo 200 (correcto)
-            resolve(res.status(201).send({
-                response
-            }));
+            if(response.length === 0){
+                resolve(res.status(201).send({
+                    response: {
+                        Code: 0,
+                        Message: "Las credenciales de acceso introducidas son incorrectas."
+                    }
+                }));
+            }
+            else{
 
+                var _ciphertext1 = CryptoAES.decrypt(body.Userpassword, 'secret key 123').toString(CryptoENC);
+                var _ciphertext2 = CryptoAES.decrypt(response[0].UsersPassword, 'secret key 123').toString(CryptoENC);
+
+                if(_ciphertext1 !== _ciphertext2){
+                    resolve(res.status(201).send({
+                        response: {
+                            Code: 0,
+                            Message: "Las credenciales de acceso introducidas son incorrectas."
+                        }
+                    }));
+                }
+                else{
+                    resolve(res.status(201).send({
+                        response: {
+                            Code: 1,
+                            Message: "El inicio de sesión ha sido completado exitosamente, bienvenido(a) " + response[0].Usersname + "."
+                        }
+                    }));
+                }
+            }
         });
     });
 }

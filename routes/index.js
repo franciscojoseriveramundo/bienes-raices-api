@@ -10,5 +10,6 @@ router.use('/typecontactregister', require('./typecontactregister'));
 router.use('/typecontact', require('./typecontact'));
 router.use('/users', require('./users'));
 router.use('/products', require('./products'));
+router.use('/email', require('./email'));
 
 module.exports = router;
